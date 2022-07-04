@@ -151,31 +151,39 @@ client.on('ready', ()=> {
 })
 
 client.on('interactionCreate', async interaction => {
+  console.log(interaction)
   if(!interaction.isCommand()) return;
   if(interaction.commandName === 'cu'){
     await interaction.reply('coloque o cu no meu peito')
   }
 })
 
-client.on('messageCreate', (message) => {
+client.on('messageCreate', message => {
+  if (message.channelId != 930474837741293579) return
   if (message.author.bot) return;
   let result = []
   if(message.content.length === 5){
-      let msgChars = [...message.content]
-      for(let i = 0; i < msgChars.length; i++){
-          console.log('aqui')
-          result.push(charCheck(msgChars, i))
-      }
+    console.log('aqui foi') 
+    let msgChars = [...message.content]
+    for(let i = 0; i < msgChars.length; i++){
+        console.log('aqui')
+        result.push(charCheck(msgChars, i))
+    }
+    let x = result.join(' ')
+    try{
+      message.reply({
+          content: String(x + ' ')
+      })
+    } catch(e) {
+      console.error(e);
+      return
+    }
   } else {
       message.reply({
           content: 'A palavra não tem 5 caracteres'
       })
   }
 
-  let x = result.join(' ')
-  message.reply({
-      content: String(x + ' ')
-  })
 })
 
 client.login(process.env.TOKEN)
