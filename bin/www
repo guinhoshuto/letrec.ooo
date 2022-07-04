@@ -150,6 +150,13 @@ client.on('ready', ()=> {
   console.log(typeof(secret))
 })
 
+client.on('interactionCreate', async interaction => {
+  if(!interaction.isCommand()) return;
+  if(interaction.commandName === 'cu'){
+    await interaction.reply('coloque o cu no meu peito')
+  }
+})
+
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
   let result = []
