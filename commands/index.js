@@ -1,3 +1,4 @@
 const cu = require('./cu')
+const mood = require('./mood')
 
-module.exports = [cu]
+module.exports = [cu,mood]

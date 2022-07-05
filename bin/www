@@ -9,6 +9,7 @@ const debug = require('debug')('letrec.ooo:server');
 const http = require('http');
 const fs = require('fs');
 const { Client, Intents } = require('discord.js');
+const path = require('path');
 require('dotenv').config();
 
 const splitLines = (s) => s.split(/\r?\n/)
@@ -153,9 +154,16 @@ client.on('ready', ()=> {
 client.on('interactionCreate', async interaction => {
   console.log(interaction)
   if(!interaction.isCommand()) return;
-  if(interaction.commandName === 'cu'){
-    await interaction.reply('coloque o cu no meu peito')
+  switch (interaction.commandName){
+    case 'cu':
+      await interaction.reply('coloque o cu no meu peito')
+      break;
+    case 'mood':
+      const mood = interaction.options.getString('input');
+      await interaction.reply({files: [path.join(__dirname, '..', 'src', `${mood}.jpg`)]})
+      break;
   }
+
 })
 
 client.on('messageCreate', message => {
